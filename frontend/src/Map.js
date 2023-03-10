@@ -1,13 +1,14 @@
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useMemo, useState } from "react";
-import Modal from "./Modal";
+// import Modal from "./Modal";
 import cities from "./cities.json";
-import HouseMarker from "./HouseMarker";
+import SideBar from "./SideBar";
+// import HouseMarker from "./HouseMarker";
 
-const markerIcon = {
-  url: "./house.svg",
-  scaledSize: new window.google.maps.Size(50, 50),
-};
+// const markerIcon = {
+//   url: "./house.svg",
+//   scaledSize: new window.google.maps.Size(50, 50),
+// };
 
 const Map = () => {
   const { isLoaded } = useLoadScript({
@@ -24,6 +25,9 @@ const Map = () => {
     east: 41.904251,
     south: -4.678978,
     west: 33.907959,
+  };
+  const onClose = () => {
+    setSelectedCity(null);
   };
 
   return (
@@ -43,17 +47,20 @@ const Map = () => {
             },
           }}
         >
-          {cities.map((property) => (
-            <Marker
-              key={property.id}
-              icon={<HouseMarker />}
-              position={{ lat: property.latitude, lng: property.longitude }}
+          {cities.map((city) => (
+            <MarkerF
+              key={city.id}
+              position={{ lat: city.latitude, lng: city.longitude }}
               onClick={() => {
-                setSelectedCity(property);
-                console.log(property);
+                setSelectedCity(city);
+                console.log("hook", selectedCity);
+                console.log("param", city);
               }}
             />
           ))}
+          {selectedCity && (
+            <SideBar location={selectedCity} onClose={onClose} />
+          )}
         </GoogleMap>
       )}
     </div>

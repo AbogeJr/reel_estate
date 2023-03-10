@@ -14,7 +14,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <a
               href="/"
-              className="text-gray-100 font-bold text-xl tracking-tight"
+              className="text-gray-100 font-thin text-xl tracking-tight"
             >
               Reel Estate
             </a>
