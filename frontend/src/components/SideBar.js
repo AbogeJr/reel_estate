@@ -1,29 +1,15 @@
-const kanairo = require("../assets/kanairo.jpeg");
+import PropertyCard from "./PropertyCard";
 
 const SideBar = ({ location, onClose }) => {
   return (
-    <div
-      style={{ backgroundColor: "#333" }}
-      className="sidebar font-mono overflow-scroll p-3 relative bg-neutral-700 text-white  md:w-2/5 right-0 top-24 ml-auto mx-4 flex  flex-col  z-30  items-center rounded-lg bg-white"
-    >
+    <div className="font-mono overflow-scroll relative bg-white md:w-2/5 right-0 top-24 ml-auto mx-4 flex  flex-col  z-30  items-center rounded-lg ">
       <button
         onClick={onClose}
-        className="text-3xl p-3 absolute top-0 right-0 self-start hover:text-red-500 hover:scale-125"
+        className="text-2xl  rounded-lg p-5 top-0  left-0 self-start hover:text-red-500 hover:scale-125"
       >
         &times;
       </button>
-      <h2 className="text-2xl font-thin p-2">{location.name}</h2>
-      <figure className="w-full">
-        <img src={kanairo} className="w-full mb-2" alt="Property Sample" />
-        <figcaption>
-          Description: 3 Bedroom Bungalow for sale with SQ in Rongai...
-        </figcaption>
-        <figcaption>Price: Ksh. 4,000,000</figcaption>
-      </figure>
-
-      <button className="p-2 border self-end text-sm rounded-md hover:bg-white hover:text-black ">
-        View Property
-      </button>
+      <PropertyCard property={location} />
     </div>
   );
 };
