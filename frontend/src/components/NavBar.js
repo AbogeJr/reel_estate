@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,12 +13,12 @@ const Navbar = () => {
       <div className="mx-auto px-4 py-2">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="text-gray-100 font-thin text-xl tracking-tight"
             >
               Reel Estate
-            </a>
+            </Link>
           </div>
 
           <div className="flex md:hidden">
@@ -48,18 +49,18 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex">
-            <a
-              href="/map"
+            <Link
+              to="/"
               className="text-gray-100 hover:text-gray-300 py-2 px-3"
             >
               Map
-            </a>
-            <a
-              href="/listings"
+            </Link>
+            <Link
+              to="/listings"
               className="text-gray-100 hover:text-gray-300 py-2 px-3"
             >
               Listings
-            </a>
+            </Link>
             <div className="relative">
               <input
                 type="text"

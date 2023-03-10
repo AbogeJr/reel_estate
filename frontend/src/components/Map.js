@@ -1,7 +1,8 @@
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useMemo, useState } from "react";
 // import Modal from "./Modal";
-import cities from "./cities.json";
+import cities from "../assets/cities.json";
+import LoadScreen from "./LoadScreen";
 import SideBar from "./SideBar";
 // import HouseMarker from "./HouseMarker";
 
@@ -33,7 +34,7 @@ const Map = () => {
   return (
     <div className="App w-screen font-sans h-screen  ">
       {!isLoaded ? (
-        <h1>Loading...</h1>
+        <LoadScreen />
       ) : (
         <GoogleMap
           mapContainerClassName="w-full h-full"

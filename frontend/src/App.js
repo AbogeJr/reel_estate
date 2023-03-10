@@ -1,13 +1,19 @@
-import Map from "./Map";
-import Navbar from "./NavBar";
-// import SideBar from "./SideBar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Navbar from "./components/NavBar";
+import Error from "./pages/Error";
+import Listings from "./pages/Listings";
 
 const App = () => {
   return (
-    <div className="App w-screen font-mono h-screen  ">
+    <BrowserRouter>
       <Navbar />
-      <Map />
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/listings" element={<Listings />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

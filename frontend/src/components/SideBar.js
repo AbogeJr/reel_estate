@@ -1,8 +1,11 @@
-const kanairo = require("./kanairo.jpeg");
+const kanairo = require("../assets/kanairo.jpeg");
 
 const SideBar = ({ location, onClose }) => {
   return (
-    <div className="sidebar font-mono overflow-scroll p-3 relative bg-neutral-800 text-white md:w-2/5 right-0 top-24 ml-auto mx-4 flex  flex-col  z-30  items-center rounded-lg bg-white">
+    <div
+      style={{ backgroundColor: "#333" }}
+      className="sidebar font-mono overflow-scroll p-3 relative bg-neutral-700 text-white  md:w-2/5 right-0 top-24 ml-auto mx-4 flex  flex-col  z-30  items-center rounded-lg bg-white"
+    >
       <button
         onClick={onClose}
         className="text-3xl p-3 absolute top-0 right-0 self-start hover:text-red-500 hover:scale-125"
@@ -18,7 +21,7 @@ const SideBar = ({ location, onClose }) => {
         <figcaption>Price: Ksh. 4,000,000</figcaption>
       </figure>
 
-      <button className="p-2 border self-end text-sm rounded-md">
+      <button className="p-2 border self-end text-sm rounded-md hover:bg-white hover:text-black ">
         View Property
       </button>
     </div>
