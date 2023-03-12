@@ -15,6 +15,7 @@ const getUsers = async (req, res) => {
 
 // Controller to Get a single User
 const getUserById = async (req, res) => {
+  console.log("Getting user by Id");
   try {
     const userId = req.params.userId;
 

@@ -1,4 +1,4 @@
-const Property = require("../models/Property");
+const Property = require("../models/propertySchema");
 
 // Controller to create a new property
 const createProperty = async (req, res) => {
@@ -7,6 +7,7 @@ const createProperty = async (req, res) => {
       location: req.body.location,
       images: req.files.map((file) => file.filename),
       description: req.body.description,
+      price: req.body.price,
       bedrooms: req.body.bedrooms,
       bathrooms: req.body.bathrooms,
       latitude: req.body.latitude,
@@ -73,6 +74,7 @@ const updateProperty = async (req, res) => {
       location: req.body.location,
       images: req.files.map((file) => file.filename),
       description: req.body.description,
+      price: req.body.price,
       bedrooms: req.body.bedrooms,
       bathrooms: req.body.bathrooms,
       latitude: req.body.latitude,
@@ -174,6 +176,18 @@ const getPropertiesByPriceRange = async (req, res) => {
   }
 };
 
+// Retrieve properties by user ID
+const getPropertiesByUserId = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const properties = await Property.find({ user_id: userId });
+    res.json(properties);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
 module.exports = {
   createProperty,
   updateProperty,
@@ -181,5 +195,6 @@ module.exports = {
   deleteProperty,
   getPropertiesByLocation,
   getAllProperties,
+  getPropertiesByUserId,
   getPropertiesByPriceRange,
 };
