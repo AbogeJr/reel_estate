@@ -4,6 +4,7 @@ import Navbar from "./components/NavBar";
 import Error from "./pages/Error";
 import Listings from "./pages/Listings";
 import Grid from "./components/Grid";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/grid" element={<Grid />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };

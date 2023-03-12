@@ -2,7 +2,7 @@ import { FaBed, FaBath } from "react-icons/fa";
 
 const PropertyCard = ({ property }) => {
   return (
-    <div key={property.id} className="w-full p-4">
+    <div key={property.id} className="w-full py-2 px-4">
       <div className="bg-white rounded-lg overflow-hidden">
         <img
           src={property.image}
