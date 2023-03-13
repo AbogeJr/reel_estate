@@ -61,6 +61,18 @@ const Navbar = () => {
             >
               Listings
             </Link>
+            <Link
+              to="/login"
+              className="text-gray-100 hover:text-gray-300 py-2 px-3"
+            >
+              Log In
+            </Link>
+            <Link
+              to="/signup"
+              className="text-gray-100 hover:text-gray-300 py-2 px-3"
+            >
+              Sign Up
+            </Link>
             <div className="relative">
               <input
                 type="text"
@@ -82,6 +94,64 @@ const Navbar = () => {
               </div>
             </div>
           </div>
+          {isMenuOpen && (
+            <div className=" md:hidden flex flex-col absolute top-24 bg-gray-800 p-16 rounded-lg items-center space-y-3">
+              <button
+                className="absolute top-0 left-0 p-3 text-2xl text-white "
+                onClick={() => setIsMenuOpen(false)}
+              >
+                &times;
+              </button>
+              <Link
+                to="/"
+                className="text-gray-100 hover:text-gray-300 py-2 px-3"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Map
+              </Link>
+              <Link
+                to="/listings"
+                className="text-gray-100 hover:text-gray-300 py-2 px-3"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Listings
+              </Link>
+              <Link
+                to="/login"
+                className="text-gray-100 hover:text-gray-300 py-2 px-3"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Log In
+              </Link>
+              <Link
+                to="/signup"
+                className="text-gray-100 hover:text-gray-300 py-2 px-3"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Sign Up
+              </Link>
+              <div className="relative">
+                <input
+                  type="text"
+                  className="bg-gray-700 rounded-full text-sm placeholder-gray-400 px-4 py-2 pr-10 focus:outline-none focus:shadow-outline w-64"
+                  placeholder="Search cities"
+                />
+                <div className="absolute right-0 top-0 mt-2 mr-4">
+                  <svg
+                    className="h-4 w-4 fill-current text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M15.043 14.35a7.5 7.5 0 111.414-1.414l4.242 4.243a1 1 0 11-1.414 1.414l-4.242-4.243zM7.5 13.5a6 6 0 100-12 6 6 0 000 12z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </nav>

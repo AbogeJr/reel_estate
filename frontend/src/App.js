@@ -3,8 +3,9 @@ import Home from "./pages/Home";
 import Navbar from "./components/NavBar";
 import Error from "./pages/Error";
 import Listings from "./pages/Listings";
-import Grid from "./components/Grid";
 import Footer from "./components/Footer";
+import LoginForm from "./pages/LoginForm";
+import SignUpForm from "./pages/SignUpForm";
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/listings" element={<Listings />} />
-        <Route path="/grid" element={<Grid />} />
+        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/login" element={<LoginForm />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
