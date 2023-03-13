@@ -2,20 +2,11 @@ const express = require("express");
 // Initialize router
 const router = express.Router();
 const multer = require("multer");
-
-// Set up Multer for image upload
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
+const path = require("path");
 
 // Import Controllers
+const { imageController } = require("../controllers/imageController");
+
 const {
   getUsers,
   createUser,
@@ -33,6 +24,21 @@ const {
   getPropertiesByUserId,
   getPropertiesByPriceRange,
 } = require("../controllers/propertyController");
+
+// Set up Multer for image upload
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+// Initialize multer upload middleware
+const upload = multer({ storage: storage });
+
+// API route to get image by filename
+router.get("/images/:filename", imageController);
 
 // Get all users
 router.route("/users").get(getUsers);
