@@ -5,7 +5,7 @@ const PropertyCard = ({ property }) => {
     <div key={property.id} className="w-full py-2 px-4">
       <div className="bg-white rounded-lg overflow-hidden">
         <img
-          src={property.image}
+          src={`https://source.unsplash.com/900x800/?apartment`}
           alt={property.title}
           className="w-full h-52 rounded-lg object-cover"
         />

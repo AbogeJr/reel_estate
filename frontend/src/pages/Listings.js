@@ -1,7 +1,23 @@
+// import axios from "axios";
+// import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 
-const Listings = () => {
-  const propertyListings = require("../assets/cities.json");
+const Listings = ({ listings }) => {
+  // const propertyListings = require("../assets/cities.json");
+  // const [listings, setListings] = useState(null);
+
+  // useEffect(() => {
+  //   console.log("Hello");
+  //   axios
+  //     .get("http://localhost:5000/properties")
+  //     .then((response) => {
+  //       // console.log(response.data.properties);
+  //       setListings(response.data.properties);
+  //     })
+  //     .catch((error) => {
+  //       // console.log(error);
+  //     });
+  // }, []);
 
   return (
     <div className="flex flex-col bg-gray-100">
@@ -13,9 +29,13 @@ const Listings = () => {
           <h1 className="text-2xl">Filter Section</h1>
         </div>
         <div className="flex flex-wrap md:w-1/2 self-start justify-center px-2 ">
-          {propertyListings.map((property) => (
-            <PropertyCard property={property} />
-          ))}
+          {listings ? (
+            listings.map((property) => (
+              <PropertyCard key={property._id} property={property} />
+            ))
+          ) : (
+            <h1>No Listings Available</h1>
+          )}
         </div>
         <div className="self-start md:px-16 border flex flex-col md:w-1/4">
           <h1 className="text-2xl">Info Section</h1>
