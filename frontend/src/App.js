@@ -8,12 +8,12 @@ import Listings from "./pages/Listings";
 import Footer from "./components/Footer";
 import LoginForm from "./pages/LoginForm";
 import SignUpForm from "./pages/SignUpForm";
+import Call from "./pages/Call";
 
 const App = () => {
   const [listings, setListings] = useState(null);
 
   useEffect(() => {
-    console.log("Hello");
     axios
       .get("http://localhost:5000/properties")
       .then((response) => {
@@ -33,6 +33,7 @@ const App = () => {
         <Route path="/listings" element={<Listings listings={listings} />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/call" element={<Call />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
