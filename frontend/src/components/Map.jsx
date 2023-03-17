@@ -13,7 +13,7 @@ import SideBar from "./SideBar";
 
 const Map = () => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: import.meta.env.MAPS_API_KEY,
+    googleMapsApiKey: import.meta.env.VITE_MAPS_API_KEY,
     libraries: ["geometry", "drawing", "places"],
   });
   const center = useMemo(
