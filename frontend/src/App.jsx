@@ -9,9 +9,10 @@ import Footer from "./components/Footer";
 import LoginForm from "./pages/LoginForm";
 import SignUpForm from "./pages/SignUpForm";
 import Call from "./pages/Call";
+import propertyListings from "./assets/cities.json";
 
 const App = () => {
-  const [listings, setListings] = useState(null);
+  const [listings, setListings] = useState(propertyListings);
 
   useEffect(() => {
     axios

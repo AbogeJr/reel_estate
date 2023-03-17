@@ -1,24 +1,8 @@
-// import axios from "axios";
-// import { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 
 const Listings = ({ listings }) => {
-  // const propertyListings = require("../assets/cities.json");
-  // const [listings, setListings] = useState(null);
-
-  // useEffect(() => {
-  //   console.log("Hello");
-  //   axios
-  //     .get("http://localhost:5000/properties")
-  //     .then((response) => {
-  //       // console.log(response.data.properties);
-  //       setListings(response.data.properties);
-  //     })
-  //     .catch((error) => {
-  //       // console.log(error);
-  //     });
-  // }, []);
-
   return (
     <div className="flex flex-col bg-gray-100">
       <h1 className="text-3xl font-thin text-neutral-100 md:px-16 px-6 mt-20 mb-5 w-full p-5 bg-gray-800 ">

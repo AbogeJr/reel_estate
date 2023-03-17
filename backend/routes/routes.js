@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // Import Controllers
 const { imageController } = require("../controllers/imageController");
@@ -24,6 +26,10 @@ const {
   getPropertiesByUserId,
   getPropertiesByPriceRange,
 } = require("../controllers/propertyController");
+const {
+  loginController,
+  signUpController,
+} = require("../controllers/authController");
 
 // Set up Multer for image upload
 const storage = multer.diskStorage({
@@ -31,7 +37,7 @@ const storage = multer.diskStorage({
     cb(null, "uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
+    cb(null, Date.now());
   },
 });
 // Initialize multer upload middleware
@@ -73,3 +79,11 @@ router
   .get(getPropertiesByPriceRange);
 
 module.exports = { router };
+
+// Register user route
+router.post("/register", signUpController);
+
+// Login user route
+router.post("/login", loginController);
+
+module.exports = router;
