@@ -37,7 +37,9 @@ const storage = multer.diskStorage({
     cb(null, "uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now());
+    const uniqueSuffix = Date.now() + Math.round(Math.random() * 1e9);
+    const extension = path.extname(file.originalname);
+    cb(null, uniqueSuffix + extension);
   },
 });
 // Initialize multer upload middleware
@@ -86,4 +88,4 @@ router.post("/register", signUpController);
 // Login user route
 router.post("/login", loginController);
 
-module.exports = router;
+module.exports = { router };
