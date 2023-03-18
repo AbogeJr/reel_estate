@@ -55,11 +55,13 @@ const signUpController = async (req, res) => {
     email,
     first_name,
     last_name,
-    avatar_image,
     role,
     password: hashedPassword,
   });
-
+  // If file is uploaded, save file information to user object
+  if (req.file) {
+    user.avatar_image = req.file.filename;
+  }
   // Save user to database
   try {
     await user.save();

@@ -80,10 +80,8 @@ router
   .route("/properties/price/:minPrice/:maxPrice")
   .get(getPropertiesByPriceRange);
 
-module.exports = { router };
-
 // Register user route
-router.post("/register", signUpController);
+router.route("/register").post(upload.single("avatar_image"), signUpController);
 
 // Login user route
 router.post("/login", loginController);
