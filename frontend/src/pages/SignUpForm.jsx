@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 function SignUpForm() {
   const [username, setUsername] = useState("");
@@ -6,15 +7,49 @@ function SignUpForm() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const registerUser = async (userData) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/register",
+        userData
+      );
+      console.log(response.data); // log the response data
+      setErrorMsg(null);
+      return response.data; // return the response data
+    } catch (error) {
+      console.error(error.response.data); // log the error response data
+      setErrorMsg(error.response.data.msg);
+      throw new Error(error); // throw an error with the error message
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // send form data to server for registration
+    let userData = {
+      username,
+      email,
+      first_name: firstName,
+      last_name: lastName,
+      password,
+    };
+    registerUser(userData);
+  };
+
+  const ErrorBox = ({ msg }) => {
+    return (
+      <div className="p-4 z-20 text-red-500 w-full text-center text-xl font-thin">
+        {msg}
+      </div>
+    );
   };
 
   return (
-    <div className="w-full pt-24 md:pt-36 pb-24">
+    <div className="w-full pt-24 md:pt-36 pb-24 relative">
       <h1 className="text-2xl mx-6 md:mx-16 p-4 mb-4 border-b">Sign Up</h1>
+      {errorMsg && <ErrorBox msg={errorMsg} />}
       <form onSubmit={handleSubmit} className="max-w-md w-4/5 mx-auto">
         <div className="mb-4">
           <label

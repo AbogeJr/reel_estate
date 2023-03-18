@@ -68,7 +68,7 @@ const Navbar = () => {
               Log In
             </Link>
             <Link
-              to="/signup"
+              to="/register"
               className="text-gray-100 hover:text-gray-300 py-2 px-3"
             >
               Sign Up
@@ -124,7 +124,7 @@ const Navbar = () => {
                 Log In
               </Link>
               <Link
-                to="/signup"
+                to="/register"
                 className="text-gray-100 hover:text-gray-300 py-2 px-3"
                 onClick={() => setIsMenuOpen(false)}
               >

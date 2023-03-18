@@ -14,16 +14,35 @@ import propertyListings from "./assets/cities.json";
 const App = () => {
   const [listings, setListings] = useState(propertyListings);
 
-  useEffect(() => {
+  const getAllListings = () => {
     axios
       .get("http://localhost:5000/properties")
       .then((response) => {
-        // console.log(response.data.properties);
         setListings(response.data.properties);
       })
-      .catch((error) => {
-        // console.log(error);
-      });
+      .catch((error) => {});
+  };
+
+  const getListingsByLocation = (location) => {
+    axios
+      .get(`http://localhost:5000/properties/location/${location}`)
+      .then((response) => {
+        setListings(response.data.properties);
+      })
+      .catch((error) => {});
+  };
+
+  const getListingsByPriceRange = (minPrice, maxPrice) => {
+    axios
+      .get("http://localhost:5000/properties/price/${minPrice}/${maxPrice}")
+      .then((response) => {
+        setListings(response.data.properties);
+      })
+      .catch((error) => {});
+  };
+
+  useEffect(() => {
+    getAllListings();
   }, []);
 
   return (
@@ -32,7 +51,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/listings" element={<Listings listings={listings} />} />
-        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/register" element={<SignUpForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/call" element={<Call />} />
         <Route path="*" element={<Error />} />
