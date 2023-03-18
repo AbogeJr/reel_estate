@@ -3,8 +3,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const { authMiddleware } = require("../middleware/auth");
 
 // Import Controllers
 const { imageController } = require("../controllers/imageController");
@@ -49,7 +48,7 @@ const upload = multer({ storage: storage });
 router.get("/images/:filename", imageController);
 
 // Get all users
-router.route("/users").get(getUsers);
+router.route("/users").get(authMiddleware, getUsers);
 // Create a new user
 router.route("/users").post(createUser);
 // Update an existing user
