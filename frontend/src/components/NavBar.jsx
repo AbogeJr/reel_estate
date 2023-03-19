@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ handleLogout, loggedIn }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -61,18 +61,40 @@ const Navbar = () => {
             >
               Listings
             </Link>
-            <Link
-              to="/login"
-              className="text-gray-100 hover:text-gray-300 py-2 px-3"
-            >
-              Log In
-            </Link>
-            <Link
-              to="/register"
-              className="text-gray-100 hover:text-gray-300 py-2 px-3"
-            >
-              Sign Up
-            </Link>
+            {loggedIn || (
+              <>
+                <Link
+                  to="/login"
+                  className="text-gray-100 hover:text-gray-300 py-2 px-3"
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/register"
+                  className="text-gray-100 hover:text-gray-300 py-2 px-3"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+            {loggedIn && (
+              <>
+                <Link
+                  to="/login"
+                  onClick={() => handleLogout()}
+                  className="text-gray-100 hover:text-gray-300 py-2 px-3"
+                >
+                  Log Out
+                </Link>
+                <Link
+                  to="/add"
+                  className="bg-gray-100 rounded-3xl mx-3 hover:text-gray-500 text-gray-800 p-2"
+                >
+                  Add Listing
+                </Link>
+              </>
+            )}
+
             <div className="relative">
               <input
                 type="text"

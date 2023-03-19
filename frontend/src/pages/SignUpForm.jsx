@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 function SignUpForm() {
   const [username, setUsername] = useState("");
@@ -7,6 +8,7 @@ function SignUpForm() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [ready, setReady] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
 
   const registerUser = async (userData) => {
@@ -17,10 +19,12 @@ function SignUpForm() {
       );
       console.log(response.data); // log the response data
       setErrorMsg(null);
+      setReady(true);
       return response.data; // return the response data
     } catch (error) {
       console.error(error.response.data); // log the error response data
       setErrorMsg(error.response.data.msg);
+      setReady(False);
       throw new Error(error); // throw an error with the error message
     }
   };

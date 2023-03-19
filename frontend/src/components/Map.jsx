@@ -1,9 +1,10 @@
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useMemo, useState } from "react";
 // import Modal from "./Modal";
-import cities from "../assets/cities.json";
+// import cities from "../assets/cities.json";
 import LoadScreen from "./LoadScreen";
 import SideBar from "./SideBar";
+// import jwt from "jsonwebtoken";
 // import HouseMarker from "./HouseMarker";
 
 // const markerIcon = {
@@ -11,7 +12,7 @@ import SideBar from "./SideBar";
 //   scaledSize: new window.google.maps.Size(50, 50),
 // };
 
-const Map = () => {
+const Map = ({ listings }) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_MAPS_API_KEY,
     libraries: ["geometry", "drawing", "places"],
@@ -31,6 +32,18 @@ const Map = () => {
     setSelectedCity(null);
   };
 
+  // const [userId, setUserId] = useState(null);
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     const decodedToken = jwt.decode(token);
+  //     setUserId(decodedToken.sub);
+  //   }
+  //   console.log(decodedToken);
+  //   console.log(userId);
+  // }, []);
+
   return (
     <div className="App w-screen font-sans h-screen  ">
       {!isLoaded ? (
@@ -48,7 +61,7 @@ const Map = () => {
             },
           }}
         >
-          {cities.map((city) => (
+          {listings.map((city) => (
             <MarkerF
               key={city.id}
               position={{ lat: city.latitude, lng: city.longitude }}
