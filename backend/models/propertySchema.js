@@ -41,6 +41,10 @@ const PropertySchema = new Schema({
     ref: "User",
     required: true,
   },
+  approved: {
+    type: Boolean,
+    default: false,
+  },
   created_at: {
     type: Date,
     default: Date.now(),

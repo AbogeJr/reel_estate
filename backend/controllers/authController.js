@@ -8,21 +8,23 @@ const loginController = async (req, res) => {
   // Check if user exists
   const user = await User.findOne({ username });
   if (!user) {
-    return res.status(400).json({ msg: "Invalid credentials (Username)" });
+    return res.status(400).json({ msg: "Username not found" });
   }
 
   // Compare password
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(400).json({ msg: "Invalid credentials (Password)" });
+    return res
+      .status(400)
+      .json({ msg: "Invalid credentials: Incorrect Password" });
   }
 
   // Create JWT token
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: 360000,
+    expiresIn: "14d",
   });
 
-  res.json({ token });
+  res.json({ token, user_id: user._id });
 };
 
 // Controller For Registering New Users

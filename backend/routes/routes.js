@@ -48,7 +48,7 @@ const upload = multer({ storage: storage });
 router.get("/images/:filename", imageController);
 
 // Get all users
-router.route("/users").get(authMiddleware, getUsers);
+router.route("/users").get(getUsers);
 // Create a new user
 router.route("/users").post(createUser);
 // Update an existing user
