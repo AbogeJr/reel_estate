@@ -4,13 +4,6 @@ import { useMemo, useState } from "react";
 // import cities from "../assets/cities.json";
 import LoadScreen from "./LoadScreen";
 import SideBar from "./SideBar";
-// import jwt from "jsonwebtoken";
-// import HouseMarker from "./HouseMarker";
-
-// const markerIcon = {
-//   url: "./house.svg",
-//   scaledSize: new window.google.maps.Size(50, 50),
-// };
 
 const Map = ({ listings }) => {
   const { isLoaded } = useLoadScript({
@@ -31,18 +24,6 @@ const Map = ({ listings }) => {
   const onClose = () => {
     setSelectedCity(null);
   };
-
-  // const [userId, setUserId] = useState(null);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     const decodedToken = jwt.decode(token);
-  //     setUserId(decodedToken.sub);
-  //   }
-  //   console.log(decodedToken);
-  //   console.log(userId);
-  // }, []);
 
   return (
     <div className="App w-screen font-sans h-screen  ">
