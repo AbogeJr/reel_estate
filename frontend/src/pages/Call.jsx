@@ -1,88 +1,113 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
 import Peer from "peerjs";
 
-function Call() {
-  const [peerId, setPeerId] = useState("");
-  const [remotePeerIdValue, setRemotePeerIdValue] = useState("");
-  const remoteVideoRef = useRef(null);
-  const currentUserVideoRef = useRef(null);
-  const peerInstance = useRef(null);
+function Call({ userId }) {
+  const [peer1, setPeer1] = useState(null);
+  const [peer2, setPeer2] = useState(null);
+  const [muted, setMuted] = useState(false);
+  const [videoEnabled, setVideoEnabled] = useState(true);
 
   useEffect(() => {
-    const peer = new Peer();
+    const p1 = new Peer({ debug: 2 });
+    // const p2 = new SimplePeer();
 
-    peer.on("open", (id) => {
-      setPeerId(id);
-    });
+    setPeer1(p1);
+    // setPeer2(p2);
 
-    peer.on("call", (call) => {
-      var getUserMedia =
-        navigator.getUserMedia ||
-        navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia;
+    const socket = io("http://localhost:5500");
 
-      getUserMedia({ video: true, audio: true }, (mediaStream) => {
-        currentUserVideoRef.current.srcObject = mediaStream;
-        currentUserVideoRef.current.play();
-        call.answer(mediaStream);
-        call.on("stream", function (remoteStream) {
-          remoteVideoRef.current.srcObject = remoteStream;
-          remoteVideoRef.current.play();
+    //   peer1.on("signal", (data) => {
+    //     // send the offer message to the signaling server
+    //     socket.emit("offer", data);
+    //   });
+
+    //   peer2.on("signal", (data) => {
+    //     // send the answer message to the signaling server
+    //     socket.emit("answer", data);
+    //   });
+
+    //   socket.on("offer", (data) => {
+    //     // receive the offer message from the signaling server
+    //     peer2.signal(data);
+    //   });
+
+    //   socket.on("answer", (data) => {
+    //     // receive the answer message from the signaling server
+    //     peer1.signal(data);
+    //   });
+
+    navigator.mediaDevices
+      .getUserMedia({ audio: true, video: true })
+      .then((stream) => {
+        // add the stream to the first peer
+        peer1.addStream(stream);
+
+        // when the second peer receives the stream, add it to a video element
+        // peer2.on("stream", (remoteStream) => {
+        //   const videoElement = document.getElementById("remote-video");
+        //   videoElement.srcObject = remoteStream;
+        // });
+
+        // when the first peer receives the stream, add it to a video element
+        peer1.on("stream", (remoteStream) => {
+          const videoElement = document.getElementById("local-video");
+          videoElement.srcObject = remoteStream;
         });
+      })
+      .catch((err) => {
+        console.error("Error accessing media devices", err);
       });
-    });
-
-    peerInstance.current = peer;
   }, []);
 
-  const call = (remotePeerId) => {
-    var getUserMedia =
-      navigator.getUserMedia ||
-      navigator.webkitGetUserMedia ||
-      navigator.mozGetUserMedia;
+  // const handleToggleMute = () => {
+  //   const audioTrack = peer1.streams[0].getAudioTracks()[0];
+  //   audioTrack.enabled = !audioTrack.enabled;
+  //   setMuted(!audioTrack.enabled);
+  // };
 
-    getUserMedia({ video: true, audio: true }, (mediaStream) => {
-      currentUserVideoRef.current.srcObject = mediaStream;
-      currentUserVideoRef.current.play();
+  // const handleToggleVideo = () => {
+  //   const videoTrack = peer1.streams[0].getVideoTracks()[0];
+  //   videoTrack.enabled = !videoTrack.enabled;
+  //   setVideoEnabled(videoTrack.enabled);
+  // };
+  // const handleHangUp = () => {
+  //   // close both peer connections
+  //   peer1.close();
+  //   peer2.close();
 
-      const call = peerInstance.current.call(remotePeerId, mediaStream);
+  //   // stop all media tracks in the user's stream
+  //   peer1.streams[0].getTracks().forEach((track) => {
+  //     track.stop();
+  //   });
 
-      call.on("stream", (remoteStream) => {
-        remoteVideoRef.current.srcObject = remoteStream;
-        remoteVideoRef.current.play();
-      });
-    });
-  };
-  console.log(peerId);
+  //   // remove the video elements from the DOM
+  //   const localVideo = document.getElementById("local-video");
+  //   const remoteVideo = document.getElementById("remote-video");
+  //   localVideo.srcObject = null;
+  //   remoteVideo.srcObject = null;
+
+  //   // navigate back to the home page or show a message
+  //   history.push("/");
+  //   // or: setShowMessage('Call ended.');
+  // };
 
   return (
-    <div className="w-full h-full pt-24">
-      <h1 className=" p-3 text-xl w-1/2 border rounded-lg text-center mx-auto ">
-        Current user id is: <span className="text-gray-500">{peerId}</span>
-      </h1>
-      <input
-        type="text"
-        className="border p-3 mx-auto w-1/2 block my-2 rounded-lg"
-        placeholder="Enter User ID here"
-        value={remotePeerIdValue}
-        onChange={(e) => setRemotePeerIdValue(e.target.value)}
-      />
-      <button
-        onClick={() => call(remotePeerIdValue)}
-        className="bg-gray-800 text-white block mx-auto mb-5 rounded-lg p-3"
-      >
-        Start Call
-      </button>
-      <div className="w-4/5 mx-auto my-4 relative h-screen border flex">
-        <div className="border w-1/5 h-1/5">
-          <video ref={currentUserVideoRef} />
-        </div>
-        <div>
-          <video ref={remoteVideoRef} />
-        </div>
+    <div>
+      <div>
+        <video id="local-video" autoPlay muted></video>
+      </div>
+      <div>
+        <video id="remote-video" autoPlay></video>
+      </div>
+      <div>
+        {/* <button onClick={handleToggleMute}>{muted ? "Unmute" : "Mute"}</button>
+        <button onClick={handleToggleVideo}>
+          {videoEnabled ? "Stop Video" : "Start Video"}
+        </button>
+        <button onClick={handleHangUp}>Hang Up</button> */}
       </div>
     </div>
   );
 }
-
 export default Call;
