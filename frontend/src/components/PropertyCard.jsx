@@ -1,6 +1,13 @@
 import { FaBed, FaBath } from "react-icons/fa";
+import { useState } from "react";
 
-const PropertyCard = ({ property }) => {
+const PropertyCard = ({ property, onSelect }) => {
+  const [isSelected, setIsSelected] = useState(false);
+
+  const handleClick = () => {
+    setIsSelected(true);
+    onSelect(property);
+  };
   return (
     <div key={property.id} className="w-full py-2 px-4">
       <div className="bg-white rounded-lg overflow-hidden">
@@ -21,7 +28,10 @@ const PropertyCard = ({ property }) => {
           </div>
           <p className="text-gray-600 text-sm">{property.price}</p>
         </div>
-        <button className="border p-2 m-2 rounded-lg text-xs">
+        <button
+          className="border p-2 m-2 rounded-lg text-xs"
+          onClick={handleClick}
+        >
           View Property
         </button>
       </div>

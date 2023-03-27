@@ -7,7 +7,7 @@ import SideBar from "./SideBar";
 
 const Map = ({ listings }) => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: import.meta.env.VITE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY,
     libraries: ["geometry", "drawing", "places"],
   });
   const center = useMemo(

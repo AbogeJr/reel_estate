@@ -1,16 +1,21 @@
-import axios from "axios";
+// import axios from "axios";
 import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 import Filter from "../components/Filter";
+import InfoSection from "../components/Info";
 
 const Listings = ({ listings }) => {
-  const [filteredlistings, setFilteredlistings] = useState(listings);
+  const [filteredlistings, setFilteredlistings] = useState(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [location, setLocation] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
+  const [selectedProperty, setSelectedProperty] = useState({});
 
+  const onSelect = (property) => {
+    setSelectedProperty(property);
+  };
   // useEffect(() => {
   //   // Fetch the real estate listings from the API when the component mounts
   //   fetchListings();
@@ -80,14 +85,23 @@ const Listings = ({ listings }) => {
         <div className="flex flex-wrap md:w-1/2 self-start justify-center px-2 ">
           {filteredlistings ? (
             filteredlistings.map((property) => (
-              <PropertyCard key={property._id} property={property} />
+              <PropertyCard
+                key={property._id}
+                onSelect={onSelect}
+                property={property}
+              />
             ))
           ) : (
             <h1>No Listings Available</h1>
           )}
         </div>
-        <div className="self-start md:px-16 border flex flex-col md:w-1/4">
-          <h1 className="text-2xl">Info Section</h1>
+        <div className="self-start md:fixed md:right-0 p-4 flex flex-col md:w-1/4">
+          {selectedProperty && (
+            <InfoSection
+              key={selectedProperty._id}
+              property={selectedProperty}
+            />
+          )}
         </div>
       </div>
     </div>

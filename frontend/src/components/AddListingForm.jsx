@@ -40,7 +40,7 @@ const AddListingForm = ({ userId, loggedIn }) => {
     formData.append("bathrooms", bathrooms);
     formData.append("latitude", latitude);
     formData.append("longitude", longitude);
-    formData.append("user_id", userId);
+    formData.append("user_id", userId || "6416f1d2b723dd4b56d875c6");
     for (let i = 0; i < images.length; i++) {
       formData.append("images", images[i]);
     }
@@ -55,6 +55,7 @@ const AddListingForm = ({ userId, loggedIn }) => {
         }
       );
       console.log(res.data);
+      console.log(userId);
     } catch (error) {
       console.log(error);
     }
@@ -194,12 +195,12 @@ const AddListingForm = ({ userId, loggedIn }) => {
             readOnly
           />
         </div>
-        <div className="mb-4">
-          <button
-            className="bg-gray-800 rounded-lg text-white"
-            type="submit"
-          ></button>
-        </div>
+        <button
+          className="bg-gray-800 my-4 p-3 w-full rounded-lg text-white"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

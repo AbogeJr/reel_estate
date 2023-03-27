@@ -25,11 +25,14 @@ const App = () => {
 
   const getAllListings = () => {
     axios
-      .get("http://localhost:5000/properties")
+      .get(`${process.env.REACT_APP_BACKEND_API}/properties`)
       .then((response) => {
+        console.log("fetched properties");
         setListings(response.data.properties);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useEffect(() => {

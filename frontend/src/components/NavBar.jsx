@@ -21,7 +21,7 @@ const Navbar = ({ handleLogout, loggedIn }) => {
             </Link>
           </div>
 
-          <div className="flex md:hidden">
+          <div className="flex sm:hidden">
             <button
               onClick={toggleMenu}
               className="text-gray-100 focus:outline-none"
@@ -48,7 +48,7 @@ const Navbar = ({ handleLogout, loggedIn }) => {
             </button>
           </div>
 
-          <div className="hidden md:flex">
+          <div className="hidden sm:flex">
             <Link
               to="/"
               className="text-gray-100 hover:text-gray-300 py-2 px-3"
@@ -80,11 +80,10 @@ const Navbar = ({ handleLogout, loggedIn }) => {
             {loggedIn && (
               <>
                 <Link
-                  to="/login"
-                  onClick={() => handleLogout()}
+                  to="/call"
                   className="text-gray-100 hover:text-gray-300 py-2 px-3"
                 >
-                  Log Out
+                  Tour
                 </Link>
                 <Link
                   to="/add"
@@ -92,32 +91,31 @@ const Navbar = ({ handleLogout, loggedIn }) => {
                 >
                   Add Listing
                 </Link>
+                <Link
+                  to="/login"
+                  onClick={() => handleLogout()}
+                  className="text-gray-100 hover:text-gray-300  py-2 px-3"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+                    />
+                  </svg>
+                </Link>
               </>
             )}
-
-            <div className="relative">
-              <input
-                type="text"
-                className="bg-gray-700 rounded-full text-sm placeholder-gray-400 px-4 py-2 pr-10 focus:outline-none focus:shadow-outline w-64"
-                placeholder="Search cities"
-              />
-              <div className="absolute right-0 top-0 mt-2 mr-4">
-                <svg
-                  className="h-4 w-4 fill-current text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M15.043 14.35a7.5 7.5 0 111.414-1.414l4.242 4.243a1 1 0 11-1.414 1.414l-4.242-4.243zM7.5 13.5a6 6 0 100-12 6 6 0 000 12z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </div>
           </div>
           {isMenuOpen && (
-            <div className=" md:hidden flex flex-col absolute top-24 bg-gray-800 p-16 rounded-lg items-center space-y-3">
+            <div className=" sm:hidden flex flex-col w-full left-0  absolute top-20 bg-gray-800 p-16 rounded-lg items-center space-y-3">
               <button
                 className="absolute top-0 left-0 p-3 text-2xl text-white "
                 onClick={() => setIsMenuOpen(false)}
@@ -127,51 +125,51 @@ const Navbar = ({ handleLogout, loggedIn }) => {
               <Link
                 to="/"
                 className="text-gray-100 hover:text-gray-300 py-2 px-3"
-                onClick={() => setIsMenuOpen(false)}
               >
                 Map
               </Link>
               <Link
                 to="/listings"
                 className="text-gray-100 hover:text-gray-300 py-2 px-3"
-                onClick={() => setIsMenuOpen(false)}
               >
                 Listings
               </Link>
-              <Link
-                to="/login"
-                className="text-gray-100 hover:text-gray-300 py-2 px-3"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Log In
-              </Link>
-              <Link
-                to="/register"
-                className="text-gray-100 hover:text-gray-300 py-2 px-3"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sign Up
-              </Link>
-              <div className="relative">
-                <input
-                  type="text"
-                  className="bg-gray-700 rounded-full text-sm placeholder-gray-400 px-4 py-2 pr-10 focus:outline-none focus:shadow-outline w-64"
-                  placeholder="Search cities"
-                />
-                <div className="absolute right-0 top-0 mt-2 mr-4">
-                  <svg
-                    className="h-4 w-4 fill-current text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
+              {loggedIn && (
+                <>
+                  <Link
+                    to="/call"
+                    className="text-gray-100 hover:text-gray-300 py-2 px-3"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M15.043 14.35a7.5 7.5 0 111.414-1.414l4.242 4.243a1 1 0 11-1.414 1.414l-4.242-4.243zM7.5 13.5a6 6 0 100-12 6 6 0 000 12z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </div>
+                    Tour
+                  </Link>
+                  <Link
+                    to="/add"
+                    className="bg-gray-100 rounded-3xl mx-3 hover:text-gray-500 text-gray-800 p-2"
+                  >
+                    Add Listing
+                  </Link>
+                  <Link
+                    to="/login"
+                    onClick={() => handleLogout()}
+                    className="text-gray-100 hover:text-gray-300  py-2 px-3"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+                      />
+                    </svg>
+                  </Link>
+                </>
+              )}
             </div>
           )}
         </div>

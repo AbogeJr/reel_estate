@@ -24,7 +24,7 @@ function SignUpForm() {
     } catch (error) {
       console.error(error.response.data); // log the error response data
       setErrorMsg(error.response.data.msg);
-      setReady(False);
+      setReady(false);
       throw new Error(error); // throw an error with the error message
     }
   };

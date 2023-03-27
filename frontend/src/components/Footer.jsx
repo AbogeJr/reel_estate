@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-gray-300 py-6">
+    <footer className="bg-gray-800 text-gray-300  py-6">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3">
           <div>
             <h3 className="text-xl font-bold mb-2">Reel Estate</h3>
             <p className="mb-2">
@@ -49,17 +49,10 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-        </div>
-        <div className="mt-4 border-t border-gray-600 pt-4 text-center md:text-left md:grid md:grid-cols-2 md:gap-4">
+        </div> */}
+        <div className="mt-4 border-t border-gray-600 pt-4 text-center  md:grid md:grid-cols-2 md:gap-4">
           <p>© 2023 Reel Estate. All rights reserved.</p>
-          <ul className="text-sm">
-            <li className="inline-block mr-4">
-              <Link to="#">Privacy Policy</Link>
-            </li>
-            <li className="inline-block">
-              <Link to="#">Terms of Service</Link>
-            </li>
-          </ul>
+          
         </div>
       </div>
     </footer>
