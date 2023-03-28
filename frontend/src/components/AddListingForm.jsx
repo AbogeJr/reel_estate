@@ -11,7 +11,7 @@ const AddListingForm = ({ userId, loggedIn, getAllListings }) => {
   const [bathrooms, setBathrooms] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     // get the user's current location using the Geolocation API
@@ -48,7 +48,7 @@ const AddListingForm = ({ userId, loggedIn, getAllListings }) => {
     }
     try {
       const res = await axios.post(
-        "http://localhost:5000/properties",
+        `${process.env.REACT_APP_BACKEND_API}/properties`,
         formData,
         {
           headers: {
@@ -59,8 +59,8 @@ const AddListingForm = ({ userId, loggedIn, getAllListings }) => {
       console.log(res.data);
       await getAllListings();
       console.log(userId);
-      navigate('/')
-      alert('Listing added succesfully. Awaiting Approval')
+      navigate("/");
+      alert("Listing added succesfully. Awaiting Approval");
     } catch (error) {
       console.log(error);
     }

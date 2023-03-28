@@ -44,7 +44,7 @@ const Map = ({ listings }) => {
         >
           {listings.map((city) => (
             <MarkerF
-              key={city.id}
+              key={city._id}
               position={{ lat: city.latitude, lng: city.longitude }}
               onClick={() => {
                 setSelectedCity(city);

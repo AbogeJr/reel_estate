@@ -18,6 +18,7 @@ const InfoSection = ({ property }) => {
       {images ? (
         images.map((image) => (
           <img
+            key={image}
             src={`http://localhost:5000/images/${image}`}
             alt={property.title}
             className="w-full h-52 rounded-lg object-cover"

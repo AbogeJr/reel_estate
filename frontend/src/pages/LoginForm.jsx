@@ -11,10 +11,13 @@ function LoginForm({ setLoggedIn, loggedIn, setUserId }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_API}/login`,
+        {
+          username,
+          password,
+        }
+      );
       localStorage.setItem("token", response.data.token);
       // console.log(response.data.token);
       setUserId(response.data.user_id);
