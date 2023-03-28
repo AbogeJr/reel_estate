@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { VideoSDKMeeting } from "@videosdk.live/rtc-js-prebuilt";
 
-export default function Call({ userName, meetingId }) {
+export default function Call() {
+  const location = useLocation();
+  const { meetingId, userName } = location.state;
   useEffect(() => {
     const config = {
       name: `${userName || "user"}`,
@@ -18,12 +21,12 @@ export default function Call({ userName, meetingId }) {
 
     const meeting = new VideoSDKMeeting();
     meeting.init(config);
-  }, []);
+  }, [userName, meetingId]);
 
   return (
     <div
       id="video-call"
-      className="w-full px-6 bg-gray-800 h-screen mt-16"
+      className="w-full px-6 bg-gray-800 h-screen pt-24"
     ></div>
   );
 }

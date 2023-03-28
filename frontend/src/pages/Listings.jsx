@@ -74,37 +74,39 @@ const Listings = ({ listings, getAllListings }) => {
   };
 
   return (
-    <div className="flex flex-col bg-gray-100">
-      <h1 className="text-3xl font-thin text-neutral-100 md:px-16 px-6 mt-20 mb-5 w-full p-5 bg-gray-800 ">
+    <>
+      <h1 className="text-3xl font-thin text-neutral-100 md:px-16 px-6 mt-20  w-full p-5 bg-gray-800 ">
         Find Your Dream Home
       </h1>
-      <div className="flex flex-wrap">
-        <div className="self-start  p-5 md:w-1/4">
-          <Filter onFilterSubmit={handleFilterSubmit} />
-        </div>
-        <div className="flex flex-wrap md:w-1/2 self-start justify-center px-2 ">
-          {filteredlistings ? (
-            filteredlistings.map((property) => (
-              <PropertyCard
-                key={property._id}
-                onSelect={onSelect}
-                property={property}
+      <div className="flex pt-8 bg-gray-100">
+        <div className="flex flex-wrap">
+          <div className=" p-4 md:w-1/4">
+            <Filter onFilterSubmit={handleFilterSubmit} />
+          </div>
+          <div className="flex flex-wrap md:w-1/2 h-screen overflow-scroll self-start justify-center mb-10 ">
+            {filteredlistings ? (
+              filteredlistings.map((property) => (
+                <PropertyCard
+                  key={property._id}
+                  onSelect={onSelect}
+                  property={property}
+                />
+              ))
+            ) : (
+              <h1>No Listings Available</h1>
+            )}
+          </div>
+          <div className="self-start p-4 flex flex-col md:w-1/4">
+            {selectedProperty && (
+              <InfoSection
+                key={selectedProperty._id}
+                property={selectedProperty}
               />
-            ))
-          ) : (
-            <h1>No Listings Available</h1>
-          )}
-        </div>
-        <div className="self-start md:fixed md:right-0 p-4 flex flex-col md:w-1/4">
-          {selectedProperty && (
-            <InfoSection
-              key={selectedProperty._id}
-              property={selectedProperty}
-            />
-          )}
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

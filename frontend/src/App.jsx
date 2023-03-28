@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import LoginForm from "./pages/LoginForm";
 import SignUpForm from "./pages/SignUpForm";
 import Call from "./pages/Call";
+import SetUpMeeting from "./pages/SetupMeeting";
 import AddListingForm from "./components/AddListingForm";
 // import propertyListings from "./assets/cities.json";
 
@@ -53,7 +54,12 @@ const App = () => {
             )
           }
         />
-        <Route path="/listings" element={<Listings listings={listings} getAllListings={getAllListings} />} />
+        <Route
+          path="/listings"
+          element={
+            <Listings listings={listings} getAllListings={getAllListings} />
+          }
+        />
         <Route path="/register" element={<SignUpForm />} />
         <Route
           path="/login"
@@ -69,17 +75,23 @@ const App = () => {
           path="/add"
           element={
             loggedIn ? (
-              <AddListingForm userId={userId} getAllListings={getAllListings} loggedIn={loggedIn} />
+              <AddListingForm
+                userId={userId}
+                getAllListings={getAllListings}
+                loggedIn={loggedIn}
+              />
             ) : (
               <Navigate to="/login" />
             )
           }
         />
         <Route
+          path="/meeting"
+          element={loggedIn ? <SetUpMeeting /> : <Navigate to="/login" />}
+        />
+        <Route
           path="/call"
-          element={
-            loggedIn ? <Call userId={userId} /> : <Navigate to="/login" />
-          }
+          element={loggedIn ? <Call /> : <Navigate to="/login" />}
         />
         <Route path="*" element={<Error />} />
       </Routes>

@@ -2,6 +2,9 @@ import React from "react";
 
 const InfoSection = ({ property }) => {
   const { images } = property;
+
+  const handleClick = (e) => {};
+
   return (
     <div className="">
       <h2 className="text-2xl font-bold mb-2">{property.title}</h2>
@@ -24,7 +27,10 @@ const InfoSection = ({ property }) => {
         <h3>No Images Found</h3>
       )}
       <p className="font-bold text-lg mb-2">Ksh. {property.price}</p>
-      <button className="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-xl">
+      <button
+        onClick={handleClick}
+        className="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-xl"
+      >
         Contact Agent
       </button>
     </div>
