@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const AddListingForm = ({ userId, loggedIn }) => {
+const AddListingForm = ({ userId, loggedIn, getAllListings }) => {
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
   const [images, setImages] = useState([]);
@@ -10,6 +11,7 @@ const AddListingForm = ({ userId, loggedIn }) => {
   const [bathrooms, setBathrooms] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+  const navigate = useNavigate()
 
   useEffect(() => {
     // get the user's current location using the Geolocation API
@@ -55,7 +57,10 @@ const AddListingForm = ({ userId, loggedIn }) => {
         }
       );
       console.log(res.data);
+      await getAllListings();
       console.log(userId);
+      navigate('/')
+      alert('Listing added succesfully. Awaiting Approval')
     } catch (error) {
       console.log(error);
     }
