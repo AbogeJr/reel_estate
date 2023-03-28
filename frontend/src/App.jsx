@@ -53,7 +53,7 @@ const App = () => {
             )
           }
         />
-        <Route path="/listings" element={<Listings listings={listings} />} />
+        <Route path="/listings" element={<Listings listings={listings} getAllListings={getAllListings} />} />
         <Route path="/register" element={<SignUpForm />} />
         <Route
           path="/login"
@@ -69,7 +69,7 @@ const App = () => {
           path="/add"
           element={
             loggedIn ? (
-              <AddListingForm userId={userId} loggedIn={loggedIn} />
+              <AddListingForm userId={userId} getAllListings={getAllListings} loggedIn={loggedIn} />
             ) : (
               <Navigate to="/login" />
             )
