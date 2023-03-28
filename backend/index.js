@@ -20,23 +20,29 @@ app.use(express.urlencoded({ extended: false }));
 // Enabling CORS
 app.use(cors());
 
-// Port for the server
-const port = 5000;
-
 // Execute router from ../routes
 app.use(router);
 
-const dbConn = () => {
-  // MongoDB connection
-  mongoose.connect(process.env.MONGO_URI).then(
-    (response) => {
-      console.log("Connected to DB");
-      app.listen(port, () => {
-        console.log(`Server listening on http://localhost:${port}`);
-      });
-    },
-    (err) => console.log("Some error", err)
-  );
+const connectToDatabase = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("Connected to DB");
+  } catch (err) {
+    console.error("Failed to connect to DB", err);
+    process.exit(1);
+  }
 };
-// Connects to databse then starts server
-dbConn();
+
+const startServer = () => {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+  });
+};
+
+const initApp = async () => {
+  await connectToDatabase();
+  startServer();
+};
+
+initApp();
