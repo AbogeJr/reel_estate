@@ -24,6 +24,7 @@ const port = 5000;
 // Execute router from ../routes
 app.use(router);
 
-app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
-});
+app.listen(process.env.PORT || 3000);
+// app.listen(port, () => {
+//   console.log(`Server listening on http://localhost:${port}`);
+// });
