@@ -12,7 +12,7 @@ const InfoSection = ({ property }) => {
         <li>{property.bathrooms} Bathrooms</li>
       </ul>
 
-      {images.length > 0 ? (
+      {images ? (
         images.map((image) => (
           <img
             src={`http://localhost:5000/images/${image}`}
