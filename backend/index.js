@@ -1,13 +1,15 @@
 // Import libs
 const express = require("express");
 // Function for connecting to database
-const { dbConn } = require("./config");
+// const { dbConn } = require("./config");
 // Cross Origin Requests
 const cors = require("cors");
 // Importing routes
 const { router } = require("./routes/routes");
 // Connect to database
-dbConn();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv").config();
+
 // Initalizing the app
 const app = express();
 
@@ -24,7 +26,17 @@ const port = 5000;
 // Execute router from ../routes
 app.use(router);
 
-app.listen(process.env.PORT || 3000);
-// app.listen(port, () => {
-//   console.log(`Server listening on http://localhost:${port}`);
-// });
+const dbConn = () => {
+  // MongoDB connection
+  mongoose.connect(process.env.MONGO_URI).then(
+    (response) => {
+      console.log("Connected to DB");
+      app.listen(port, () => {
+        console.log(`Server listening on http://localhost:${port}`);
+      });
+    },
+    (err) => console.log("Some error", err)
+  );
+};
+// Connects to databse then starts server
+dbConn();
