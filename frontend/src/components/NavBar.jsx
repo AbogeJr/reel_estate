@@ -80,10 +80,10 @@ const Navbar = ({ handleLogout, loggedIn }) => {
             {loggedIn && (
               <>
                 <Link
-                  to="/call"
+                  to="/meeting"
                   className="text-gray-100 hover:text-gray-300 py-2 px-3"
                 >
-                  Tour
+                  Meet
                 </Link>
                 <Link
                   to="/add"
@@ -137,10 +137,10 @@ const Navbar = ({ handleLogout, loggedIn }) => {
               {loggedIn && (
                 <>
                   <Link
-                    to="/call"
+                    to="/meeting"
                     className="text-gray-100 hover:text-gray-300 py-2 px-3"
                   >
-                    Tour
+                    Meet
                   </Link>
                   <Link
                     to="/add"
