@@ -4,14 +4,14 @@ import PropertyCard from "../components/PropertyCard";
 import Filter from "../components/Filter";
 import InfoSection from "../components/Info";
 
-const Listings = ({ listings }) => {
+const Listings = ({ listings, getAllListings }) => {
   const [filteredlistings, setFilteredlistings] = useState(null);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [location, setLocation] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
-  const [selectedProperty, setSelectedProperty] = useState({});
+  const [selectedProperty, setSelectedProperty] = useState(null);
 
   const onSelect = (property) => {
     setSelectedProperty(property);
