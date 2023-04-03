@@ -16,24 +16,11 @@ const Listings = ({ listings, getAllListings }) => {
   const onSelect = (property) => {
     setSelectedProperty(property);
   };
-  // useEffect(() => {
-  //   // Fetch the real estate listings from the API when the component mounts
-  //   fetchListings();
-  // }, []);
 
   useEffect(() => {
     // Filter the listings when the filter values change
     filterListings();
   }, [minPrice, maxPrice, location, bedrooms, bathrooms]);
-
-  // const fetchListings = async () => {
-  //   try {
-  //     const response = await axios.get("/api/listings");
-  //     setListings(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const filterListings = () => {
     let filteredListings = listings.filter((listing) => {

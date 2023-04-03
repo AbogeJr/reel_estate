@@ -1,7 +1,5 @@
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useMemo, useState } from "react";
-// import Modal from "./Modal";
-// import cities from "../assets/cities.json";
 import LoadScreen from "./LoadScreen";
 import SideBar from "./SideBar";
 
